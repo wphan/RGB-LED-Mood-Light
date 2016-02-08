@@ -9,8 +9,8 @@
 #include <avr/interrupt.h>
 #include <stdlib.h>
 
-volatile uint8_t LED_DUTY[3][2] = { {0, 255}, {0, 255}, {0, 255} };		// duty for each color: { {RED_CUR, RED_TARGET}, {GRN_CUR, GRN_TARGET}, {BLU_CUR, BLU_TARGET) }
-volatile uint8_t TARGET_REACHED[3] = {0, 0, 0};							// flag for each color: {REACHED_RED, REACHED_GREEN, REACHED_BLUE} 
+volatile uint8_t LED_DUTY[3][2] = { {255, 0}, {255, 0}, {255, 0} };		// duty for each color: { {RED_CUR, RED_TARGET}, {GRN_CUR, GRN_TARGET}, {BLU_CUR, BLU_TARGET) }
+volatile uint8_t TARGET_REACHED[3] = {1, 0, 1};							// flag for each color: {REACHED_RED, REACHED_GREEN, REACHED_BLUE} 
 
 int main(void)
 {
@@ -70,7 +70,7 @@ int main(void)
 		{
 			if (TARGET_REACHED[i])
 			{
-				LED_DUTY[i][1] = 255 - rand();
+				LED_DUTY[i][1] = rand();
 				TARGET_REACHED[i] = 0;
 			}
 		}
